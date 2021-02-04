@@ -5,6 +5,7 @@
         <script src="lib/angular/angular.js"></script>
         <script src="./main.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Ohm Delivery</title>
     </head>
     <body>
@@ -12,18 +13,64 @@
             <h1>Ohm Delivery</h1>
             <h2>Get shocked by the power</h2>
         </div>
-        
         <div ng-app="ohm-delivery">
-            <form ng-controller="tracking" ng-submit="sendData()">
-                <p>
-                    <input id="tracking" type="text" ng-model="trackingId" placeholder="Enter your tracking id"/>
-                </p>
-                <p>
-                    <button id="formBtn" type="submit">Submit</button>
-                </p>
-                <p>
-                    <span ng-if="errorMessage">{{errorMessage}}</span>
-                </p>
+            <form ng-controller="tracking" ng-submit="submitTrackingId()">
+                <div class="container flex flex-y flex-main-center flex-cross-center">
+                    <div class="row">
+                        <div class="cell">
+                            <input 
+                                ng-change="reset()" id="tracking" type="text" ng-model="trackingId" 
+                                placeholder="Please enter your tracking id"
+                            />
+                        </div>
+                        <div class="cell">
+                            <select 
+                                ng-if="trackingStatus === 'IN_DELIVERY'" 
+                                ng-model="userSelectedTrackingStatus" 
+                                ng-change="changeSelectedStatus(this.userSelectedTrackingStatus)"
+                                placeholder="Have you Received/Refused the order?">
+                                <option value="DELIVERED">Delivered</option>
+                                <option value="REFUSED">Refused</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="ohm">
+                        <div class="cell flex-y">
+                            <div class="cell">
+                                Name: <b>{{ohm.client.name}}</b>
+                            </div>
+                            <div class="cell">
+                                Address: <b>{{ohm.client.address}}</b>
+                            </div>
+                            <div class="cell">
+                                <span ng-if="deliveryStatus">{{deliveryStatus}}</span>
+                            </div>
+                            <div class="cell">
+                                <span ng-if="errorMessage">{{errorMessage}}</span>
+                            </div>
+                        </div>
+                        <div class="cell flex-y">
+                            <div class="cell" ng-show="trackingStatus === 'IN_DELIVERY'">
+                                <textarea 
+                                    ng-model="comment" 
+                                    rows="4"
+                                    placeholder="Is there any specific reason for refusing the order?"
+                                ></textarea>
+                            </div>
+                            <div class="cell" ng-if="trackingStatus === 'IN_DELIVERY'">
+                                <button type="button" class="buttonload" ng-click="onDelivery()">
+                                    Mark Ohm as {{userSelectedTrackingStatus | lowercase}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="!deliveryStatus" class="row">
+                        <button ng-disabled="loadingStatus || !trackingId.trim()" id="formBtn" type="submit" class="buttonload">
+                        <i ng-if="loadingStatus" class="fa fa-spinner fa-spin"></i>
+                            Search for my Ohm
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </body>

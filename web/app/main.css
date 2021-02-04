@@ -24,12 +24,64 @@ h2 {
     font-style: italic;
 }
 
-input {
-    margin: 2em auto 1em;
-    width: 50%;
-}
 p {
     text-align: center;
     margin: auto;
     line-height: 2.0;
+}
+
+.container {
+    max-width: 50rem;
+    margin: auto;
+}
+.row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 5px;
+    line-height: 40px;
+}
+.cell {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+.flex-x {
+    flex-direction: row;
+}
+.flex-main-center {
+    justify-content: center;
+}
+.flex-cross-center {
+    align-items: center;
+}
+.flex-1 {
+    flex: 1;
+}
+.flex-y {
+    flex-direction: column;
+}
+.flex-y.cell {
+    align-items: flex-start;
+}
+.container input, button, select, textarea {
+    padding: 5px;
+    width: 20rem;
+    background: #fff;
+    border: 1px solid #ccc;
+    outline: none;
+}
+.container button {
+    width: fit-content;
+    box-shadow: 1px 1px 1px #000;
+    transition: 0.8s;
+}
+.container button:hover {
+    padding: 6px;
+    box-shadow: 1px 1px 5px #000;
 }
