@@ -6,7 +6,7 @@ const constants = require('./constants');
 
 const db = (async () => {
   const _db = await low(adapter);
-//   await _db.defaults(config).write();
+  await _db.defaults(config).write();
   return _db;
 })()
 
@@ -32,10 +32,8 @@ async function updateOhmStatus(id, status = 'DELIVERED', comment = null) {
     }
 
     if (ohmValue.status === 'IN_DELIVERY' && (status === 'DELIVERED' || status === 'REFUSED')) {
-        console.warn(comment)
         ohm = ohm.assign({ status, comment });
         await ohm.write();
-        console.warn(ohm.value())
         return ohm.value();
     }
 

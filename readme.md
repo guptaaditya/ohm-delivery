@@ -1,3 +1,17 @@
+# Implementation
+
+## Server
+Implemented the following APIs:-
+* Find the ohm by tracking id GET /ohms/{TrackingId}
+* Update the ohm status PUT /ohms/{TrackingId}/status
+    @params 
+        `status`: Optional. Used only when the existing status of Ohm is IN_DELIVERY.
+                  Allowed values are 'DELIVERED', 'REFUSED'
+        `comment`: Optional. Used to save the remarks along with the status when status is changed form 'IN_DELIVERY' to 'DELIVERED'/'REFUSED'
+
+## Frontend
+Touched Angular 1 for the first time but have tried demonstrating usage of few directives.
+Could have also used ng-include to break template file but skipped due to time constraint
 
 # OHM DELIVERY
 ohm-delivery is a minimalistic project that you have to improve and build. 

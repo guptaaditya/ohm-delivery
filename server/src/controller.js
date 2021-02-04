@@ -20,7 +20,6 @@ async function getOhm(req, res) {
 
 async function updateOhm(req, res) {
     try {
-        console.error(req.body.comment);
         const updated = await Utils.updateOhmStatus(req.params.id, req.body.status, req.body.comment);
         if (updated) {
             res.status(200).send(updated);
@@ -30,7 +29,6 @@ async function updateOhm(req, res) {
             });
         }
     } catch (e) {
-        console.log(e);
         res.status(500).send({
             message: messages.errors.SERVER_ERROR
         });
